@@ -1,14 +1,11 @@
 package com.example.codegeneratorfx;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-
-public class HelloController {
-    @FXML
+public class CodeGeneratorFXController {
+    /*@FXML
     private Label welcomeText;
 
     @FXML
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
-    }
+    }*/
 }
