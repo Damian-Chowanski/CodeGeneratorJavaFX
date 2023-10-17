@@ -51,5 +51,19 @@ public class Lottery {
         return true;
     }
 
+    private void removeCode(int id){
+        codes.remove(id);
+    }
+
+    private void addCode(String code, boolean isWon, boolean isUsed){
+        codes.add(new Code(code,isWon,isUsed));
+    }
+
+    private void editCode(int id, String code, boolean isWon, boolean isUsed){
+        codes.get(id).setCode(code);
+        codes.get(id).setWinning(isWon);
+        codes.get(id).setUsed(isUsed);
+    }
+
 
 }
