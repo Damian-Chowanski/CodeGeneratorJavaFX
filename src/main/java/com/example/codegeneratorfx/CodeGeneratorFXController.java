@@ -6,19 +6,23 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-
+import javafx.stage.Stage;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CodeGeneratorFXController implements Initializable {
 
-    private final Lottery lottery = new Lottery();
+    Lottery lottery = Lottery.getInstance();
     @FXML
     private TableView<Code> codes_tab;
 
@@ -39,15 +43,17 @@ public class CodeGeneratorFXController implements Initializable {
 
     @FXML
     private TextField qtyOfCodes_tv;
-
-    @FXML
-    private Button beginBtn;
-
-    @FXML
-    void onButtonClick(ActionEvent event) {
-
-    }
     ObservableList<Code> listOfCodes = FXCollections.observableArrayList();
+
+    @FXML
+    public void onButtonClick(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("administration-panel.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("Administration Panel");
+        stage.setScene(scene);
+        stage.show();
+    }
 
     @FXML
     public void onGenerateBtnClick(ActionEvent event){

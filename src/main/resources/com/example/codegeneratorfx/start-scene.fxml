@@ -18,7 +18,7 @@
          <DialogPane contentText="W poniższym polu tekstowym podaj ilość kodów, które chciałbyś wyświetlić, a następnie długość kodu" expanded="true" headerText="Witaj w generatorze kodów!" layoutX="88.0" prefHeight="120.0" prefWidth="360.0" />
          <Button fx:id="beginBtn" layoutX="194.0" layoutY="427.0" mnemonicParsing="false" onAction="#onButtonClick" prefHeight="46.0" prefWidth="149.0" text="Panel Administracyjny" />
          <Button fx:id="generateBTN" layoutX="238.0" layoutY="158.0" mnemonicParsing="false" onAction="#onGenerateBtnClick" text="Generuj!" />
-         <TableView fx:id="codes_tab" layoutX="36.0" layoutY="210.0" prefHeight="200.0" prefWidth="465.0">
+         <TableView fx:id="codes_tab" editable="true" layoutX="36.0" layoutY="210.0" prefHeight="200.0" prefWidth="465.0">
            <columns>
              <TableColumn fx:id="idColumn" prefWidth="48.000003814697266" text="ID" />
              <TableColumn fx:id="codeColumn" prefWidth="175.3333511352539" text="Code" />

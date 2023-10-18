@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Lottery {
-    private  ArrayList<Code> codes;
+    private static final Lottery instance = new Lottery();
+    private  ArrayList<Code> codes = new ArrayList<>();
 
-    public Lottery() {
-        this.codes = new ArrayList<>();
+    public static Lottery getInstance(){
+        return instance;
     }
+
+    public Lottery() {}
 
     public ArrayList<Code> getCodes() {
         return codes;
