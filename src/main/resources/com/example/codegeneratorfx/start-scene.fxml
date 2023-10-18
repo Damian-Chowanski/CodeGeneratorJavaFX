@@ -3,17 +3,31 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="20.0" style="-fx-min-height: auto; -fx-min-width: auto;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codegeneratorfx.CodeGeneratorFXController">
+<VBox alignment="CENTER" prefHeight="526.0" prefWidth="577.0" spacing="20.0" style="-fx-min-height: auto; -fx-min-width: auto;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codegeneratorfx.CodeGeneratorFXController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-   <Pane prefHeight="236.0" prefWidth="535.0">
+   <Pane prefHeight="505.0" prefWidth="559.0">
       <children>
-         <DialogPane contentText="Aplikacja generuje wybraną przez Ciebie ilość kodów a następnie je wyświetla. Jeśli chcesz kontunuwać, naciśnij przycisk &quot;Zaczynamy!&quot;" expanded="true" headerText="Witaj w generatorze kodów!" layoutX="88.0" prefHeight="120.0" prefWidth="360.0" />
-         <Button fx:id="beginBtn" layoutX="213.0" layoutY="154.0" mnemonicParsing="false" onAction="#onButtonClick" prefHeight="46.0" prefWidth="111.0" text="Zaczynamy!" />
+         <DialogPane contentText="W poniższym polu tekstowym podaj ilość kodów, które chciałbyś wyświetlić, a następnie długość kodu" expanded="true" headerText="Witaj w generatorze kodów!" layoutX="88.0" prefHeight="120.0" prefWidth="360.0" />
+         <Button fx:id="beginBtn" layoutX="194.0" layoutY="427.0" mnemonicParsing="false" onAction="#onButtonClick" prefHeight="46.0" prefWidth="149.0" text="Panel Administracyjny" />
+         <Button layoutX="238.0" layoutY="158.0" mnemonicParsing="false" text="Generuj!" />
+         <TableView fx:id="codes_tab" layoutX="36.0" layoutY="210.0" prefHeight="200.0" prefWidth="465.0">
+           <columns>
+             <TableColumn fx:id="idColumn" prefWidth="48.000003814697266" text="ID" />
+             <TableColumn fx:id="CodeColumn" prefWidth="175.3333511352539" text="Code" />
+               <TableColumn fx:id="isUsedColumn" prefWidth="114.6666259765625" text="IsUsed" />
+               <TableColumn fx:id="isWonColumn" prefWidth="127.33334350585938" text="IsWon" />
+           </columns>
+         </TableView>
+         <TextField fx:id="qtyOfCodes_tv" layoutX="36.0" layoutY="120.0" promptText="ilość kodów" />
+         <TextField fx:id="lengthOfCodes_tv" layoutX="343.0" layoutY="120.0" promptText="długość kodów" />
       </children>
    </Pane>
 </VBox>

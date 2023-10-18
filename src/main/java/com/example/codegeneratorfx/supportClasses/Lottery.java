@@ -38,7 +38,7 @@ public class Lottery {
             }
             if (!isUnique(code)) {
                 i--;
-            } else codes.add(new Code(code,(rand.nextDouble() < usedChance),rand.nextDouble() > winChance));
+            } else codes.add(new Code(codes.size()+1,code,(rand.nextDouble() < usedChance),rand.nextDouble() > winChance));
         }
     }
 
@@ -56,7 +56,7 @@ public class Lottery {
     }
 
     private void addCode(String code, boolean isWon, boolean isUsed){
-        codes.add(new Code(code,isWon,isUsed));
+        codes.add(new Code(codes.size()+1,code,isWon,isUsed));
     }
 
     private void editCode(int id, String code, boolean isWon, boolean isUsed){
