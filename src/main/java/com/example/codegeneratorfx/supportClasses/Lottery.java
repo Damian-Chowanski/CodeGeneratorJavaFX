@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Lottery {
-    private ArrayList<Code> codes;
+    private  ArrayList<Code> codes;
 
     public Lottery() {
         this.codes = new ArrayList<>();
@@ -38,7 +38,7 @@ public class Lottery {
             }
             if (!isUnique(code)) {
                 i--;
-            } else codes.add(new Code(codes.size()+1,code,(rand.nextDouble() < usedChance),rand.nextDouble() > winChance));
+            } else codes.add(new Code(codes.size()+1,code,(rand.nextDouble() < winChance),rand.nextDouble() < usedChance));
         }
     }
 

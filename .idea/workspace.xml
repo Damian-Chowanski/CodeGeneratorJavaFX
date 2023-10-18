@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8e2c3f7e-1854-4c0a-93b1-7783f8a9ae32" name="Changes" comment="three new methods created in Lottery class: Add, remove and edit codes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/CodeGeneratorFXController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/CodeGeneratorFXController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/supportClasses/Code.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/supportClasses/Code.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/supportClasses/Lottery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/supportClasses/Lottery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codegeneratorfx/start-scene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codegeneratorfx/start-scene.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

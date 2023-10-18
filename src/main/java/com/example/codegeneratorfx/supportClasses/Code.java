@@ -1,7 +1,7 @@
 package com.example.codegeneratorfx.supportClasses;
 
 public class Code {
-    int codeID;
+    Integer codeID;
     String code;
     boolean isWinning = false;
     boolean isUsed = false;

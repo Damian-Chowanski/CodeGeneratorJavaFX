@@ -1,6 +1,7 @@
 package com.example.codegeneratorfx;
 
 import com.example.codegeneratorfx.supportClasses.Code;
+import com.example.codegeneratorfx.supportClasses.Lottery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,6 +18,7 @@ import java.util.ResourceBundle;
 
 public class CodeGeneratorFXController implements Initializable {
 
+    private final Lottery lottery = new Lottery();
     @FXML
     private TableView<Code> codes_tab;
 
@@ -24,7 +26,7 @@ public class CodeGeneratorFXController implements Initializable {
     private TableColumn<Code, Integer> idColumn;
 
     @FXML
-    private TableColumn<Code, String> CodeColumn;
+    private TableColumn<Code, String> codeColumn;
 
     @FXML
     private TableColumn<Code, Boolean> isUsedColumn;
@@ -45,20 +47,23 @@ public class CodeGeneratorFXController implements Initializable {
     void onButtonClick(ActionEvent event) {
 
     }
-    ObservableList<Code> list = FXCollections.observableArrayList();
+    ObservableList<Code> listOfCodes = FXCollections.observableArrayList();
 
     @FXML
-    public void onGenerateBtnClick(){
-
+    public void onGenerateBtnClick(ActionEvent event){
+        int qtyOfCodes = Integer.parseInt(qtyOfCodes_tv.getText());
+        int lengthOfCodes = Integer.parseInt(lengthOfCodes_tv.getText());
+        lottery.generateCodes(qtyOfCodes,lengthOfCodes);
+        listOfCodes.clear();
+        listOfCodes.addAll(lottery.getCodes());
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        list.clear();
-        idColumn.setCellValueFactory( new PropertyValueFactory<Code, Integer>("codeID"));
-        CodeColumn.setCellValueFactory(new PropertyValueFactory<Code,String>("code"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<Code, Integer>("codeID"));
+        codeColumn.setCellValueFactory(new PropertyValueFactory<Code,String>("code"));
         isUsedColumn.setCellValueFactory(new PropertyValueFactory<Code,Boolean>("isUsed"));
         isWonColumn.setCellValueFactory(new PropertyValueFactory<Code,Boolean>("isWinning"));
 
-        codes_tab.setItems(list);
+        codes_tab.setItems(listOfCodes);
     }
 }
