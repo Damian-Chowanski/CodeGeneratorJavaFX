@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -14,5 +19,20 @@
             <TableColumn fx:id="isWonColumn" prefWidth="127.33334350585938" text="IsWon" />
          </columns>
       </TableView>
+      <VBox layoutX="67.0" layoutY="223.0" prefHeight="162.0" prefWidth="207.0">
+         <children>
+            <Label text="Code" />
+            <TextField fx:id="code_tf" />
+            <Label text="IsUsed" />
+            <TextField fx:id="isUsed_tf" />
+            <Label text="IsWon" />
+            <TextField fx:id="IsWon_tf">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TextField>
+         </children>
+      </VBox>
+      <Button fx:id="Change_Btn" layoutX="397.0" layoutY="292.0" mnemonicParsing="false" text="Change" />
    </children>
 </AnchorPane>
