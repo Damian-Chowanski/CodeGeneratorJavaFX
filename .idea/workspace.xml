@@ -9,7 +9,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/AdministrationPanelScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/AdministrationPanelScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/CodeGeneratorFXController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/CodeGeneratorFXController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/supportClasses/Lottery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/supportClasses/Lottery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codegeneratorfx/start-scene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codegeneratorfx/start-scene.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codegeneratorfx/administration-panel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codegeneratorfx/administration-panel.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +28,20 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SET_USER_NAME_GLOBALLY" value="false" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Damian-Chowanski"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="4e321f9d-2f66-450c-a4d3-c742b8273f2a" />
+        <option name="url" value="https://github.com/Damian-Chowanski/CodeGeneratorJavaFX.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -60,6 +74,9 @@
       <recent name="com.example.codegeneratorfx.supportClasses" />
     </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="com.example.codegeneratorfx" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.codegeneratorfx" />
     </key>
   </component>

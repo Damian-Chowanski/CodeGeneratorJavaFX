@@ -3,7 +3,6 @@ package com.example.codegeneratorfx;
 import com.example.codegeneratorfx.supportClasses.Code;
 import com.example.codegeneratorfx.supportClasses.Lottery;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,8 +14,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AdministrationPanelScene implements Initializable {
-    Lottery lottery = Lottery.getInstance();
-    ObservableList<Code> listOfCodes = FXCollections.observableArrayList();
+    private Lottery lottery;
+    private ObservableList<Code> listOfCodes = FXCollections.observableArrayList();
+
+
+    @FXML
+    private TableColumn<Code, String> codeColumn;
 
     @FXML
     private TableView<Code> codes_tab;
@@ -25,14 +28,15 @@ public class AdministrationPanelScene implements Initializable {
     private TableColumn<Code, Integer> idColumn;
 
     @FXML
-    private TableColumn<Code, String> codeColumn;
-
-    @FXML
     private TableColumn<Code, Boolean> isUsedColumn;
 
     @FXML
     private TableColumn<Code, Boolean> isWonColumn;
 
+    public AdministrationPanelScene(Lottery lottery){
+        this.lottery = lottery;
+        listOfCodes.addAll(lottery.getCodes());
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         idColumn.setCellValueFactory(new PropertyValueFactory<Code, Integer>("codeID"));

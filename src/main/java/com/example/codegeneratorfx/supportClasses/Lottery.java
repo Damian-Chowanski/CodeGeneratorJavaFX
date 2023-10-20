@@ -4,14 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Lottery {
-    private static final Lottery instance = new Lottery();
-    private  ArrayList<Code> codes = new ArrayList<>();
+    private ArrayList<Code> codes = new ArrayList<>();
 
-    public static Lottery getInstance(){
-        return instance;
+    public Lottery() {
     }
-
-    public Lottery() {}
 
     public ArrayList<Code> getCodes() {
         return codes;
@@ -21,7 +17,7 @@ public class Lottery {
         this.codes = codes;
     }
 
-    public void generateCodes(int numberOfCodes, int codeLength){
+    public void generateCodes(int numberOfCodes, int codeLength) {
         Random rand = new Random();
         //Random class with chars equals to {a...z} or {A...Z} or {0...9}
         RandomInRanges rir = new RandomInRanges(48, 57);
@@ -41,28 +37,29 @@ public class Lottery {
             }
             if (!isUnique(code)) {
                 i--;
-            } else codes.add(new Code(codes.size()+1,code,(rand.nextDouble() < winChance),rand.nextDouble() < usedChance));
+            } else
+                codes.add(new Code(codes.size() + 1, code, (rand.nextDouble() < winChance), rand.nextDouble() < usedChance));
         }
     }
 
     private boolean isUnique(String codeToCheck) {
-        for (Code code: codes){
-            if (code.code.equals(codeToCheck)){
+        for (Code code : codes) {
+            if (code.code.equals(codeToCheck)) {
                 return false;
             }
         }
         return true;
     }
 
-    private void removeCode(int id){
+    private void removeCode(int id) {
         codes.remove(id);
     }
 
-    private void addCode(String code, boolean isWon, boolean isUsed){
-        codes.add(new Code(codes.size()+1,code,isWon,isUsed));
+    private void addCode(String code, boolean isWon, boolean isUsed) {
+        codes.add(new Code(codes.size() + 1, code, isWon, isUsed));
     }
 
-    private void editCode(int id, String code, boolean isWon, boolean isUsed){
+    private void editCode(int id, String code, boolean isWon, boolean isUsed) {
         codes.get(id).setCode(code);
         codes.get(id).setWinning(isWon);
         codes.get(id).setUsed(isUsed);

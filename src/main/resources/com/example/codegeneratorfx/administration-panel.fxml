@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.codegeneratorfx.AdministrationPanelScene"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="codes_tab" editable="true" layoutX="67.0" layoutY="14.0" prefHeight="200.0" prefWidth="465.0">
+         <columns>
+            <TableColumn fx:id="idColumn" prefWidth="48.000003814697266" text="ID" />
+            <TableColumn fx:id="codeColumn" prefWidth="175.3333511352539" text="Code" />
+            <TableColumn fx:id="isUsedColumn" prefWidth="114.6666259765625" text="IsUsed" />
+            <TableColumn fx:id="isWonColumn" prefWidth="127.33334350585938" text="IsWon" />
+         </columns>
+      </TableView>
+   </children>
 </AnchorPane>

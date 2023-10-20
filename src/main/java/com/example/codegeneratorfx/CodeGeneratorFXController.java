@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class CodeGeneratorFXController implements Initializable {
 
-    Lottery lottery = Lottery.getInstance();
+    Lottery lottery = new Lottery();
     @FXML
     private TableView<Code> codes_tab;
 
@@ -47,7 +47,11 @@ public class CodeGeneratorFXController implements Initializable {
 
     @FXML
     public void onButtonClick(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("administration-panel.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("administration-panel.fxml"));
+        AdministrationPanelScene administrationPanelScene = new AdministrationPanelScene(lottery);
+        loader.setController(administrationPanelScene);
+        Parent root = loader.load();
+
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Administration Panel");
