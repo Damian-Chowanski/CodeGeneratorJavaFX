@@ -24,9 +24,6 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class AdministrationPanelScene implements Initializable {
-    private final Lottery lottery;
-    private final ObservableList<Code> listOfCodes = FXCollections.observableArrayList();
-
 
     @FXML
     private Button change_Btn;
@@ -59,6 +56,10 @@ public class AdministrationPanelScene implements Initializable {
     @FXML
     private TableColumn<Code, Boolean> isWonColumn;
 
+    private final Lottery lottery;
+    private final ObservableList<Code> listOfCodes = FXCollections.observableArrayList();
+
+
     public AdministrationPanelScene(Lottery lottery) {
         this.lottery = lottery;
         listOfCodes.addAll(lottery.getCodes());
@@ -88,55 +89,97 @@ public class AdministrationPanelScene implements Initializable {
 
     @FXML
     public void onChangeBtnClick(ActionEvent event) {
+        int codeLength = listOfCodes.get(0).getCode().length();
         String tempCode = code_tf.getText();
-        boolean tempIsUsed = isUsed_tf.getText().equals("true");
-        boolean tempIsWon = isWon_tf.getText().equals("true");
+        if (tempCode.length() == codeLength) {
+            boolean tempIsUsed = isUsed_tf.getText().equals("true");
+            boolean tempIsWon = isWon_tf.getText().equals("true");
 
-        int currentCodeId = Integer.parseInt(codeId_tf.getText());
+            int currentCodeId = Integer.parseInt(codeId_tf.getText());
 
-        for (Code code : lottery.getCodes()) {
-            if (code.getCodeID() == currentCodeId) {
-                code.setCode(tempCode);
-                code.setUsed(tempIsUsed);
-                code.setWinning(tempIsWon);
-                listOfCodes.clear();
-                listOfCodes.addAll(lottery.getCodes());
-                codes_tab.refresh();
-                break;
+            for (Code code : lottery.getCodes()) {
+                if (code.getCodeID() == currentCodeId) {
+                    code.setCode(tempCode);
+                    code.setUsed(tempIsUsed);
+                    code.setWinning(tempIsWon);
+                    listOfCodes.clear();
+                    listOfCodes.addAll(lottery.getCodes());
+                    codes_tab.refresh();
+                    break;
+                }
             }
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Zmiana kodu");
+            alert.setHeaderText(null);
+            alert.setContentText("Wybrany przez Ciebie kod został zmieniony\n" +
+                    "kod: " + tempCode + "\n" +
+                    "Czy użyty: " + tempIsUsed + "\n" +
+                    "Czy zwycieski: " + tempIsWon + "\n");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Niepoprawna długość kodu");
+            alert.setHeaderText(null);
+            alert.setContentText("Długość kodu jest nie prawidlowa. Kod powinien zawierać " + codeLength + "znaki\\ów");
+            alert.showAndWait();
         }
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Zmiana kodu");
-        alert.setHeaderText(null);
-        alert.setContentText("Wybrany przez Ciebie kod został zmieniony\n" +
-                "kod: " + tempCode + "\n" +
-                "Czy użyty: " + tempIsUsed + "\n" +
-                "Czy zwycieski: " + tempIsWon + "\n");
-        alert.showAndWait();
     }
 
     @FXML
     public void onAddBtnClick(ActionEvent event) {
+        int codeLength = listOfCodes.get(0).getCode().length();
         ArrayList<Code> actualListOfCOdes = lottery.getCodes();
         String tempCode = code_tf.getText();
-        boolean tempIsUsed = isUsed_tf.getText().equalsIgnoreCase("true");
-        boolean tempIsWon = isWon_tf.getText().equalsIgnoreCase("true");
+        if (containsAllowedCharacters(tempCode)) {
+            if (tempCode.length() == codeLength) {
 
-        Code newCode = new Code(actualListOfCOdes.size() + 1,tempCode ,tempIsUsed ,tempIsWon);
-        actualListOfCOdes.add(newCode);
-        lottery.setCodes(actualListOfCOdes);
-        listOfCodes.clear();
-        listOfCodes.addAll(lottery.getCodes());
-        codes_tab.refresh();
+                boolean tempIsUsed = isUsed_tf.getText().equalsIgnoreCase("true");
+                boolean tempIsWon = isWon_tf.getText().equalsIgnoreCase("true");
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Dodano nowy Kod");
-        alert.setHeaderText(null);
-        alert.setContentText("Wybrany przez Ciebie kod został dodany\n" +
-                "kod: " + tempCode + "\n" +
-                "Czy użyty: " + tempIsUsed + "\n" +
-                "Czy zwycieski: " + tempIsWon + "\n");
-        alert.showAndWait();
+                Code newCode = new Code(actualListOfCOdes.size() + 1, tempCode, tempIsUsed, tempIsWon);
+                actualListOfCOdes.add(newCode);
+                lottery.setCodes(actualListOfCOdes);
+                listOfCodes.clear();
+                listOfCodes.addAll(lottery.getCodes());
+                codes_tab.refresh();
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Dodano nowy Kod");
+                alert.setHeaderText(null);
+                alert.setContentText("Wybrany przez Ciebie kod został dodany\n" +
+                        "kod: " + tempCode + "\n" +
+                        "Czy użyty: " + tempIsUsed + "\n" +
+                        "Czy zwycieski: " + tempIsWon + "\n");
+                alert.showAndWait();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Niepoprawna długość kodu");
+                alert.setHeaderText(null);
+                alert.setContentText("Długość kodu jest nie prawidlowa. Kod powinien zawierać " + codeLength + "znaki\\ów");
+                alert.showAndWait();
+            }
+        }else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Nieprawidłowy kod");
+            alert.setHeaderText(null);
+            alert.setContentText("Kod Powinien składać się tylko z cyfr i liter");
+            alert.showAndWait();
+        }
+    }
+
+    private boolean containsAllowedCharacters(String tempCode) {
+        char[] temp = tempCode.toCharArray();
+        /*
+        RandomInRanges rir = new RandomInRanges(48, 57);
+        rir.addRange(65, 90);
+        rir.addRange(97, 122);
+         */
+        for (char mark: temp){
+            if (!((mark > 47 && mark <58) || (mark > 64 && mark < 91) || (mark > 96 && mark < 123))){
+                return false;
+            }
+        }
+        return true;
     }
 
     @FXML

@@ -70,18 +70,35 @@ public class CodeGeneratorFXController implements Initializable {
 
     @FXML
     public void onGenerateBtnClick(ActionEvent event) {
-        int qtyOfCodes = Integer.parseInt(qtyOfCodes_tv.getText());
-        int lengthOfCodes = Integer.parseInt(lengthOfCodes_tv.getText());
-        lottery.setCodes(new ArrayList<Code>());
-        lottery.generateCodes(qtyOfCodes, lengthOfCodes);
-        listOfCodes.clear();
-        listOfCodes.addAll(lottery.getCodes());
+        try {
+            int qtyOfCodes = Integer.parseInt(qtyOfCodes_tv.getText());
+            int lengthOfCodes = Integer.parseInt(lengthOfCodes_tv.getText());
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Codes generated");
-        alert.setHeaderText(null);
-        alert.setContentText("Twoje kody zostały wygenerowane");
-        alert.showAndWait();
+            if (!qtyOfCodes_tv.getText().isEmpty() && !lengthOfCodes_tv.getText().isEmpty()) {
+                lottery.setCodes(new ArrayList<Code>());
+                lottery.generateCodes(qtyOfCodes, lengthOfCodes);
+                listOfCodes.clear();
+                listOfCodes.addAll(lottery.getCodes());
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Codes generated");
+                alert.setHeaderText(null);
+                alert.setContentText("Twoje kody zostały wygenerowane");
+                alert.showAndWait();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setHeaderText(null);
+                alert.setContentText("Wprowadź prawidłowe wartości");
+                alert.showAndWait();
+            }
+        } catch (NumberFormatException NFE){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText(null);
+            alert.setContentText("Wprowadź prawidłowe wartości");
+            alert.showAndWait();
+        }
     }
 
     @Override
