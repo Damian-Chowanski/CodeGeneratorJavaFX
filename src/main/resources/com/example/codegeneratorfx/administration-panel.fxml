@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="402.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView fx:id="codes_tab" editable="true" layoutX="67.0" layoutY="14.0" prefHeight="200.0" prefWidth="465.0">
+      <TableView fx:id="codes_tab" editable="true" layoutX="81.0" layoutY="14.0" prefHeight="200.0" prefWidth="465.0">
          <columns>
             <TableColumn fx:id="idColumn" prefWidth="48.000003814697266" text="ID" />
             <TableColumn fx:id="codeColumn" prefWidth="175.3333511352539" text="Code" />
@@ -19,7 +19,7 @@
             <TableColumn fx:id="isWonColumn" prefWidth="127.33334350585938" text="IsWon" />
          </columns>
       </TableView>
-      <VBox layoutX="67.0" layoutY="223.0" prefHeight="162.0" prefWidth="207.0">
+      <VBox layoutX="81.0" layoutY="227.0" minHeight="100.0" minWidth="100.0" prefHeight="162.0" prefWidth="207.0">
          <children>
             <Label text="CodeID" />
             <TextField fx:id="codeId_tf" disable="true" editable="false" />
@@ -35,7 +35,7 @@
             </TextField>
          </children>
       </VBox>
-      <VBox layoutX="402.0" layoutY="239.0" prefHeight="138.0" prefWidth="83.0">
+      <VBox layoutX="414.0" layoutY="239.0" minHeight="100.0" minWidth="100.0" prefHeight="138.0" prefWidth="83.0">
          <children>
             <Button fx:id="change_Btn" mnemonicParsing="false" onAction="#onChangeBtnClick" text="Change">
                <VBox.margin>
@@ -53,5 +53,6 @@
             </Button>
          </children>
       </VBox>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBackBtnClick" text="Back" />
    </children>
 </AnchorPane>

@@ -7,13 +7,16 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.CookieHandler;
 import java.net.URL;
 import java.util.ArrayList;
@@ -56,7 +59,7 @@ public class AdministrationPanelScene implements Initializable {
     @FXML
     private TableColumn<Code, Boolean> isWonColumn;
 
-    public AdministrationPanelScene(Lottery lottery){
+    public AdministrationPanelScene(Lottery lottery) {
         this.lottery = lottery;
         listOfCodes.addAll(lottery.getCodes());
     }
@@ -64,9 +67,9 @@ public class AdministrationPanelScene implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         idColumn.setCellValueFactory(new PropertyValueFactory<Code, Integer>("codeID"));
-        codeColumn.setCellValueFactory(new PropertyValueFactory<Code,String>("code"));
-        isUsedColumn.setCellValueFactory(new PropertyValueFactory<Code,Boolean>("isUsed"));
-        isWonColumn.setCellValueFactory(new PropertyValueFactory<Code,Boolean>("isWinning"));
+        codeColumn.setCellValueFactory(new PropertyValueFactory<Code, String>("code"));
+        isUsedColumn.setCellValueFactory(new PropertyValueFactory<Code, Boolean>("isUsed"));
+        isWonColumn.setCellValueFactory(new PropertyValueFactory<Code, Boolean>("isWinning"));
 
         codes_tab.setItems(listOfCodes);
 
@@ -82,49 +85,80 @@ public class AdministrationPanelScene implements Initializable {
             }
         });
     }
+
     @FXML
-    public void onChangeBtnClick(ActionEvent event){
+    public void onChangeBtnClick(ActionEvent event) {
+        String tempCode = code_tf.getText();
+        boolean tempIsUsed = isUsed_tf.getText().equals("true");
+        boolean tempIsWon = isWon_tf.getText().equals("true");
 
         int currentCodeId = Integer.parseInt(codeId_tf.getText());
 
-        for (Code code: lottery.getCodes()){
-            if (code.getCodeID() == currentCodeId){
-                code.setCode(code_tf.getText());
-                code.setUsed(isUsed_tf.getText().equals("true"));
-                code.setWinning(isWon_tf.getText().equals("true"));
+        for (Code code : lottery.getCodes()) {
+            if (code.getCodeID() == currentCodeId) {
+                code.setCode(tempCode);
+                code.setUsed(tempIsUsed);
+                code.setWinning(tempIsWon);
                 listOfCodes.clear();
                 listOfCodes.addAll(lottery.getCodes());
                 codes_tab.refresh();
                 break;
             }
         }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Zmiana kodu");
+        alert.setHeaderText(null);
+        alert.setContentText("Wybrany przez Ciebie kod został zmieniony\n" +
+                "kod: " + tempCode + "\n" +
+                "Czy użyty: " + tempIsUsed + "\n" +
+                "Czy zwycieski: " + tempIsWon + "\n");
+        alert.showAndWait();
     }
 
     @FXML
-    public void onAddBtnClick(ActionEvent event){
+    public void onAddBtnClick(ActionEvent event) {
         ArrayList<Code> actualListOfCOdes = lottery.getCodes();
-        Code newCode = new Code(actualListOfCOdes.size()+1,code_tf.getText(), isUsed_tf.getText().equalsIgnoreCase("true"), isWon_tf.getText().equalsIgnoreCase("true"));
+        String tempCode = code_tf.getText();
+        boolean tempIsUsed = isUsed_tf.getText().equalsIgnoreCase("true");
+        boolean tempIsWon = isWon_tf.getText().equalsIgnoreCase("true");
+
+        Code newCode = new Code(actualListOfCOdes.size() + 1,tempCode ,tempIsUsed ,tempIsWon);
         actualListOfCOdes.add(newCode);
         lottery.setCodes(actualListOfCOdes);
         listOfCodes.clear();
         listOfCodes.addAll(lottery.getCodes());
         codes_tab.refresh();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Dodano nowy Kod");
+        alert.setHeaderText(null);
+        alert.setContentText("Wybrany przez Ciebie kod został dodany\n" +
+                "kod: " + tempCode + "\n" +
+                "Czy użyty: " + tempIsUsed + "\n" +
+                "Czy zwycieski: " + tempIsWon + "\n");
+        alert.showAndWait();
     }
 
     @FXML
-    public void onRemoveBtnClick(ActionEvent event){
+    public void onRemoveBtnClick(ActionEvent event) {
 
         int currentCodeId = Integer.parseInt(codeId_tf.getText());
 
         ArrayList<Code> actualListOfCodes = lottery.getCodes();
-        actualListOfCodes.remove(currentCodeId-1);
-        for (int i = currentCodeId; i <actualListOfCodes.size()+1; i++){
-            actualListOfCodes.get(i-1).setCodeID(i);
+        actualListOfCodes.remove(currentCodeId - 1);
+        for (int i = currentCodeId; i < actualListOfCodes.size() + 1; i++) {
+            actualListOfCodes.get(i - 1).setCodeID(i);
         }
 
         lottery.setCodes(actualListOfCodes);
         listOfCodes.clear();
         listOfCodes.addAll(lottery.getCodes());
         codes_tab.refresh();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Dodano nowy Kod");
+        alert.setHeaderText(null);
+        alert.setContentText("Wybrany przez Ciebie kod został usuniety");
+        alert.showAndWait();
     }
 }

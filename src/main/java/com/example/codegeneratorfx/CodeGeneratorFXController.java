@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -18,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CodeGeneratorFXController implements Initializable {
@@ -45,6 +47,10 @@ public class CodeGeneratorFXController implements Initializable {
     private TextField qtyOfCodes_tv;
     ObservableList<Code> listOfCodes = FXCollections.observableArrayList();
 
+    public CodeGeneratorFXController(Lottery lottery) {
+        this.lottery = lottery;
+    }
+
     @FXML
     public void onButtonClick(ActionEvent event) throws IOException {
         AdministrationPanelScene administrationPanelScene = new AdministrationPanelScene(lottery);
@@ -63,9 +69,16 @@ public class CodeGeneratorFXController implements Initializable {
     public void onGenerateBtnClick(ActionEvent event){
         int qtyOfCodes = Integer.parseInt(qtyOfCodes_tv.getText());
         int lengthOfCodes = Integer.parseInt(lengthOfCodes_tv.getText());
+        lottery.setCodes(new ArrayList<Code>());
         lottery.generateCodes(qtyOfCodes,lengthOfCodes);
         listOfCodes.clear();
         listOfCodes.addAll(lottery.getCodes());
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Codes generated");
+        alert.setHeaderText(null);
+        alert.setContentText("Twoje kody zostały wygenerowane");
+        alert.showAndWait();
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
