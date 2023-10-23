@@ -15,15 +15,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AdministrationPanelScene implements Initializable {
-    private Lottery lottery;
-    private ObservableList<Code> listOfCodes = FXCollections.observableArrayList();
+    private final Lottery lottery;
+    private final ObservableList<Code> listOfCodes = FXCollections.observableArrayList();
 
 
     @FXML
-    private Button change_Btn = new Button();
+    private Button change_Btn;
 
 
     @FXML
@@ -81,7 +82,7 @@ public class AdministrationPanelScene implements Initializable {
     }
     @FXML
     public void onChangeBtnClick(ActionEvent event){
-        System.out.println("test");
+
         int currentCodeId = Integer.parseInt(codeId_tf.getText());
 
         for (Code code: listOfCodes){
@@ -89,6 +90,7 @@ public class AdministrationPanelScene implements Initializable {
                 code.setCode(code_tf.getText());
                 code.setUsed(isUsed_tf.getText().equals("true"));
                 code.setWinning(isWon_tf.getText().equals("true"));
+                codes_tab.refresh();
                 break;
             }
         }
