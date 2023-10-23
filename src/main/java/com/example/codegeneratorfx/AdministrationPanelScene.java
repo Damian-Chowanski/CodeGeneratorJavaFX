@@ -14,8 +14,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.net.CookieHandler;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class AdministrationPanelScene implements Initializable {
@@ -85,14 +87,44 @@ public class AdministrationPanelScene implements Initializable {
 
         int currentCodeId = Integer.parseInt(codeId_tf.getText());
 
-        for (Code code: listOfCodes){
+        for (Code code: lottery.getCodes()){
             if (code.getCodeID() == currentCodeId){
                 code.setCode(code_tf.getText());
                 code.setUsed(isUsed_tf.getText().equals("true"));
                 code.setWinning(isWon_tf.getText().equals("true"));
+                listOfCodes.clear();
+                listOfCodes.addAll(lottery.getCodes());
                 codes_tab.refresh();
                 break;
             }
         }
+    }
+
+    @FXML
+    public void onAddBtnClick(ActionEvent event){
+        ArrayList<Code> actualListOfCOdes = lottery.getCodes();
+        Code newCode = new Code(actualListOfCOdes.size()+1,code_tf.getText(), isUsed_tf.getText().equalsIgnoreCase("true"), isWon_tf.getText().equalsIgnoreCase("true"));
+        actualListOfCOdes.add(newCode);
+        lottery.setCodes(actualListOfCOdes);
+        listOfCodes.clear();
+        listOfCodes.addAll(lottery.getCodes());
+        codes_tab.refresh();
+    }
+
+    @FXML
+    public void onRemoveBtnClick(ActionEvent event){
+
+        int currentCodeId = Integer.parseInt(codeId_tf.getText());
+
+        ArrayList<Code> actualListOfCodes = lottery.getCodes();
+        actualListOfCodes.remove(currentCodeId-1);
+        for (int i = currentCodeId; i <actualListOfCodes.size()+1; i++){
+            actualListOfCodes.get(i-1).setCodeID(i);
+        }
+
+        lottery.setCodes(actualListOfCodes);
+        listOfCodes.clear();
+        listOfCodes.addAll(lottery.getCodes());
+        codes_tab.refresh();
     }
 }
