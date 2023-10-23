@@ -17,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import java.util.ResourceBundle;
 
 public class CodeGeneratorFXController implements Initializable {
 
-    Lottery lottery = new Lottery();
+    Lottery lottery;
     @FXML
     private TableView<Code> codes_tab;
 
@@ -45,11 +46,13 @@ public class CodeGeneratorFXController implements Initializable {
 
     @FXML
     private TextField qtyOfCodes_tv;
-    ObservableList<Code> listOfCodes = FXCollections.observableArrayList();
 
     public CodeGeneratorFXController(Lottery lottery) {
         this.lottery = lottery;
     }
+
+    ObservableList<Code> listOfCodes = FXCollections.observableArrayList();
+
 
     @FXML
     public void onButtonClick(ActionEvent event) throws IOException {
@@ -66,11 +69,11 @@ public class CodeGeneratorFXController implements Initializable {
     }
 
     @FXML
-    public void onGenerateBtnClick(ActionEvent event){
+    public void onGenerateBtnClick(ActionEvent event) {
         int qtyOfCodes = Integer.parseInt(qtyOfCodes_tv.getText());
         int lengthOfCodes = Integer.parseInt(lengthOfCodes_tv.getText());
         lottery.setCodes(new ArrayList<Code>());
-        lottery.generateCodes(qtyOfCodes,lengthOfCodes);
+        lottery.generateCodes(qtyOfCodes, lengthOfCodes);
         listOfCodes.clear();
         listOfCodes.addAll(lottery.getCodes());
 
@@ -80,12 +83,14 @@ public class CodeGeneratorFXController implements Initializable {
         alert.setContentText("Twoje kody zostały wygenerowane");
         alert.showAndWait();
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        listOfCodes.addAll(lottery.getCodes());
         idColumn.setCellValueFactory(new PropertyValueFactory<Code, Integer>("codeID"));
-        codeColumn.setCellValueFactory(new PropertyValueFactory<Code,String>("code"));
-        isUsedColumn.setCellValueFactory(new PropertyValueFactory<Code,Boolean>("isUsed"));
-        isWonColumn.setCellValueFactory(new PropertyValueFactory<Code,Boolean>("isWinning"));
+        codeColumn.setCellValueFactory(new PropertyValueFactory<Code, String>("code"));
+        isUsedColumn.setCellValueFactory(new PropertyValueFactory<Code, Boolean>("isUsed"));
+        isWonColumn.setCellValueFactory(new PropertyValueFactory<Code, Boolean>("isWinning"));
 
         codes_tab.setItems(listOfCodes);
     }

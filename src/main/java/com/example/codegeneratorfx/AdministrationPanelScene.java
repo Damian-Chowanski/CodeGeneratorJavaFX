@@ -161,4 +161,17 @@ public class AdministrationPanelScene implements Initializable {
         alert.setContentText("Wybrany przez Ciebie kod został usuniety");
         alert.showAndWait();
     }
+
+    public void onBackBtnClick(ActionEvent event) throws IOException {
+        CodeGeneratorFXController codeGeneratorFXController = new CodeGeneratorFXController(lottery);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("start-scene.fxml"));
+        loader.setController(codeGeneratorFXController);
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("Code generator");
+        stage.setScene(scene);
+        stage.show();
+    }
 }
