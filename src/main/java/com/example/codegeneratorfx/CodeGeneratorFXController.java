@@ -47,8 +47,8 @@ public class CodeGeneratorFXController implements Initializable {
 
     @FXML
     public void onButtonClick(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("administration-panel.fxml"));
         AdministrationPanelScene administrationPanelScene = new AdministrationPanelScene(lottery);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("administration-panel.fxml"));
         loader.setController(administrationPanelScene);
         Parent root = loader.load();
 
