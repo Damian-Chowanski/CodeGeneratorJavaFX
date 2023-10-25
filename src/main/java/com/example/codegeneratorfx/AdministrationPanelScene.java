@@ -28,7 +28,6 @@ public class AdministrationPanelScene implements Initializable {
     @FXML
     private Button change_Btn;
 
-
     @FXML
     private TextField isWon_tf;
 

@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox alignment="CENTER" prefHeight="526.0" prefWidth="577.0" spacing="20.0" style="-fx-min-height: 100; -fx-min-width: 100;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
@@ -15,8 +16,8 @@
     </padding>
    <Pane prefHeight="505.0" prefWidth="559.0">
       <children>
-         <DialogPane contentText="W poniższym polu tekstowym podaj ilość kodów, które chciałbyś wyświetlić, a następnie długość kodu" expanded="true" headerText="Witaj w generatorze kodów!" layoutX="88.0" prefHeight="120.0" prefWidth="360.0" />
-         <Button fx:id="beginBtn" layoutX="194.0" layoutY="427.0" mnemonicParsing="false" onAction="#onButtonClick" prefHeight="46.0" prefWidth="149.0" text="Panel Administracyjny" />
+         <DialogPane contentText="W poniżych polach tekstowych wprowadź ilość oraz długość  kodów, które mam wygenerować. A następnie kliknij &quot;Graj&quot; aby rozpocząć grę!" expanded="true" headerText="Witaj w grze jednoręki bandyta!" layoutX="88.0" prefHeight="120.0" prefWidth="360.0" />
+         <Button fx:id="beginBtn" layoutX="352.0" layoutY="427.0" mnemonicParsing="false" onAction="#onButtonClick" prefHeight="46.0" prefWidth="149.0" text="Panel Administracyjny" />
          <Button fx:id="generateBTN" layoutX="238.0" layoutY="158.0" mnemonicParsing="false" onAction="#onGenerateBtnClick" text="Generuj!" />
          <TableView fx:id="codes_tab" editable="true" layoutX="36.0" layoutY="210.0" prefHeight="200.0" prefWidth="465.0">
            <columns>
@@ -28,6 +29,11 @@
          </TableView>
          <TextField fx:id="qtyOfCodes_tv" layoutX="36.0" layoutY="120.0" promptText="ilość kodów" />
          <TextField fx:id="lengthOfCodes_tv" layoutX="343.0" layoutY="120.0" promptText="długość kodów" />
+         <Button fx:id="playBtn" layoutX="36.0" layoutY="427.0" mnemonicParsing="false" onAction="#onPlayBtnClick" prefHeight="46.0" prefWidth="90.0" text="GRAJ!">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Button>
       </children>
    </Pane>
 </VBox>

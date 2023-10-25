@@ -11,10 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -47,12 +44,25 @@ public class CodeGeneratorFXController implements Initializable {
     @FXML
     private TextField qtyOfCodes_tv;
 
+    @FXML
+    private Button playBtn;
+
     public CodeGeneratorFXController(Lottery lottery) {
         this.lottery = lottery;
     }
 
     ObservableList<Code> listOfCodes = FXCollections.observableArrayList();
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        listOfCodes.addAll(lottery.getCodes());
+        idColumn.setCellValueFactory(new PropertyValueFactory<Code, Integer>("codeID"));
+        codeColumn.setCellValueFactory(new PropertyValueFactory<Code, String>("code"));
+        isUsedColumn.setCellValueFactory(new PropertyValueFactory<Code, Boolean>("isUsed"));
+        isWonColumn.setCellValueFactory(new PropertyValueFactory<Code, Boolean>("isWinning"));
+
+        codes_tab.setItems(listOfCodes);
+    }
 
     @FXML
     public void onButtonClick(ActionEvent event) throws IOException {
@@ -101,14 +111,27 @@ public class CodeGeneratorFXController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        listOfCodes.addAll(lottery.getCodes());
-        idColumn.setCellValueFactory(new PropertyValueFactory<Code, Integer>("codeID"));
-        codeColumn.setCellValueFactory(new PropertyValueFactory<Code, String>("code"));
-        isUsedColumn.setCellValueFactory(new PropertyValueFactory<Code, Boolean>("isUsed"));
-        isWonColumn.setCellValueFactory(new PropertyValueFactory<Code, Boolean>("isWinning"));
 
-        codes_tab.setItems(listOfCodes);
+    @FXML
+    void onPlayBtnClick(ActionEvent event) throws IOException {
+
+        if (!lottery.getCodes().isEmpty()) {
+            OneArmedBanditController oneArmedBanditController = new OneArmedBanditController(lottery);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("one-armed-bandit-scene.fxml"));
+            loader.setController(oneArmedBanditController);
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setTitle("Play");
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText(null);
+            alert.setContentText("Wygeneruj jakieś kody ;)");
+            alert.showAndWait();
+        }
     }
 }

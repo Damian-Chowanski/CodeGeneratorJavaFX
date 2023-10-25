@@ -25,8 +25,8 @@ public class Lottery {
         rir.addRange(97, 122);
 
         //Set win and use chance percent:
-        double usedChance = 0.45;
-        double winChance = 0.05;
+        double usedChance = 0.05;
+        double winChance = 0.95;
 
         //Generates unique codes to ArrayList<String>
 
