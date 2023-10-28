@@ -40,6 +40,9 @@ public class OneArmedBanditController {
     @FXML
     private Label win_lbl;
 
+    @FXML
+    private Label cash_lbl;
+
 
     private final Lottery lottery;
     ArrayList<Code> playingCodes;

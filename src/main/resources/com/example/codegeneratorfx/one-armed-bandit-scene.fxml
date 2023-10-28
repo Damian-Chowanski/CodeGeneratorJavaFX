@@ -9,13 +9,14 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <Label fx:id="cash_lbl" alignment="CENTER_RIGHT" layoutX="477.0" layoutY="22.0" prefHeight="18.0" prefWidth="109.0" text="cash: 0" />
       <Label fx:id="win_lbl" alignment="CENTER" layoutX="105.0" layoutY="39.0" prefHeight="90.0" prefWidth="389.0" style="-fx-background-color: green;" text="Wygrałeś!" visible="false">
          <font>
             <Font size="48.0" />
          </font>
       </Label>
-      <Button fx:id="backBtn" layoutX="545.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBackBtnClick" text="Back" />
-      <HBox alignment="CENTER" layoutX="200.0" layoutY="150.0" prefHeight="100.0" prefWidth="226.0">
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="360.0" mnemonicParsing="false" onAction="#onBackBtnClick" text="Back" />
+      <HBox alignment="CENTER" layoutX="186.0" layoutY="150.0" prefHeight="100.0" prefWidth="226.0">
          <children>
             <Label fx:id="code1_lbl" text="label" visible="false">
                <HBox.margin>
@@ -40,7 +41,7 @@
             </Label>
          </children>
       </HBox>
-      <Button fx:id="spinBtn" layoutX="255.0" layoutY="271.0" mnemonicParsing="false" onAction="#onSpinBtnClick" prefHeight="57.0" prefWidth="116.0" text="Spin!">
+      <Button fx:id="spinBtn" layoutX="204.0" layoutY="273.0" mnemonicParsing="false" onAction="#onSpinBtnClick" prefHeight="58.0" prefWidth="191.0" text="Spin!">
          <font>
             <Font size="24.0" />
          </font>
