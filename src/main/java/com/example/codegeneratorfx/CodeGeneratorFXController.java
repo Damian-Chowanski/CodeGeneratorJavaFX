@@ -111,15 +111,15 @@ public class CodeGeneratorFXController implements Initializable {
         }
     }
 
-
     @FXML
     void onPlayBtnClick(ActionEvent event) throws IOException {
 
         if (!lottery.getCodes().isEmpty()) {
-            OneArmedBanditController oneArmedBanditController = new OneArmedBanditController(lottery);
+            OneArmedBanditController oneArmedBanditController = new OneArmedBanditController(lottery, 1000);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("one-armed-bandit-scene.fxml"));
             loader.setController(oneArmedBanditController);
             Parent root = loader.load();
+            oneArmedBanditController.setCash(1000);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);

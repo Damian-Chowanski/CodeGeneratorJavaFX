@@ -39,19 +39,24 @@ public class OneArmedBanditController {
 
     @FXML
     private Label win_lbl;
-
     @FXML
     private Label cash_lbl;
-
 
     private final Lottery lottery;
     ArrayList<Code> playingCodes;
     ArrayList<Code> drawnCodes;
+    int cash;
 
-    public OneArmedBanditController(Lottery lottery) {
+    public OneArmedBanditController(Lottery lottery, int cash) {
+        cash_lbl = new Label();
+        this.cash = cash;
         this.lottery = lottery;
         playingCodes = lottery.getCodes();
         drawnCodes = new ArrayList<>();
+    }
+
+    public void setCash(int cash) {
+        this.cash_lbl.setText("cash: " + cash);
     }
 
     @FXML
@@ -81,17 +86,19 @@ public class OneArmedBanditController {
             timeline3.setOnFinished(TimeEvent -> {
                 if (isWon()) {
                     win_lbl.setVisible(true);
+                    cash += 100;
+                    cash_lbl.setText("cash: " + cash);
                     spinBtn.setText("Spin Again!");
                 } else {
                     lose_lbl.setVisible(true);
+                    cash -= 100;
+                    cash_lbl.setText("cash: " + cash);
                     spinBtn.setText("Spin Again!");
                 }
             });
 
             timeline1.play();
-        }else { //Zmienić tego elsa
-            goToMainMenu(event);
-        }
+        }else goToMainMenu(event);
     }
 
     private boolean isWon() {
@@ -135,10 +142,6 @@ public class OneArmedBanditController {
     }
 
     @FXML
-    void onBackBtnClick(ActionEvent event) throws IOException {
-        goToMainMenu(event);
-    }
-
     private void goToMainMenu(ActionEvent event) throws IOException {
         CodeGeneratorFXController codeGeneratorFXController = new CodeGeneratorFXController(lottery);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("start-scene.fxml"));
