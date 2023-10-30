@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e2c3f7e-1854-4c0a-93b1-7783f8a9ae32" name="Changes" comment="three new methods created in Lottery class: Add, remove and edit codes">
+    <list default="true" id="8e2c3f7e-1854-4c0a-93b1-7783f8a9ae32" name="Changes" comment="added cash counter for game">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/CodeGeneratorFXController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/CodeGeneratorFXController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/OneArmedBanditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/OneArmedBanditController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/supportClasses/Lottery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/supportClasses/Lottery.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codegeneratorfx/one-armed-bandit-scene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codegeneratorfx/one-armed-bandit-scene.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -108,10 +108,20 @@
       <option name="presentableId" value="Default" />
       <updated>1697473299879</updated>
     </task>
+    <task id="LOCAL-00001" summary="added cash counter for game">
+      <option name="closed" value="true" />
+      <created>1698610399740</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1698610399740</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="three new methods created in Lottery class: Add, remove and edit codes" />
-    <option name="LAST_COMMIT_MESSAGE" value="three new methods created in Lottery class: Add, remove and edit codes" />
+    <MESSAGE value="added cash counter for game" />
+    <option name="LAST_COMMIT_MESSAGE" value="added cash counter for game" />
   </component>
 </project>
