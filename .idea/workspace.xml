@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8e2c3f7e-1854-4c0a-93b1-7783f8a9ae32" name="Changes" comment="added cash counter for game">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/MegaBonusGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/OneArmedBanditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/OneArmedBanditController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/supportClasses/Lottery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/supportClasses/Lottery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codegeneratorfx/one-armed-bandit-scene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codegeneratorfx/one-armed-bandit-scene.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

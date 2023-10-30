@@ -4,7 +4,6 @@ import com.example.codegeneratorfx.supportClasses.Code;
 import com.example.codegeneratorfx.supportClasses.Lottery;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,6 +46,8 @@ public class OneArmedBanditController {
     @FXML
     private Label win_lbl;
     @FXML
+    private Button megaBet_btn;
+    @FXML
     private Label cash_lbl;
 
     private final Lottery lottery;
@@ -76,7 +77,7 @@ public class OneArmedBanditController {
         drawnCodes.clear();
 
         if (!(playingCodes.size() <3) && cash >=50) {
-            cash -= 50;
+
             cash_lbl.setText("cash: " + cash);
             spinBtn.setText("Spin Again!");
 
@@ -163,6 +164,20 @@ public class OneArmedBanditController {
         label.setVisible(true);
         label.setText(String.valueOf(playingCodes.get(randomID).getCode()));
         labelWon.setText(String.valueOf(playingCodes.get(randomID).getIsWinning()));
+    }
+
+    @FXML
+    void onMegaBetClick(ActionEvent event) throws IOException {
+        MegaBetGame megaBonusGame = new MegaBetGame(lottery);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("mega-bet-game.fxml"));
+        loader.setController(megaBonusGame);
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("Mega Bet Game");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
