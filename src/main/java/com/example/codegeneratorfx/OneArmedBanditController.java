@@ -168,10 +168,11 @@ public class OneArmedBanditController {
 
     @FXML
     void onMegaBetClick(ActionEvent event) throws IOException {
-        MegaBetGame megaBonusGame = new MegaBetGame(lottery);
+        MegaBetGame megaBetGame = new MegaBetGame(lottery, cash);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("mega-bet-game.fxml"));
-        loader.setController(megaBonusGame);
+        loader.setController(megaBetGame);
         Parent root = loader.load();
+        megaBetGame.setCash(cash);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);

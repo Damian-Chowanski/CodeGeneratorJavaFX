@@ -6,10 +6,16 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -50,36 +56,51 @@ public class MegaBetGame {
     @FXML
     private Label win_lbl;
 
+    private int cash;
     private ArrayList<Code> drawnCodes;
 
-    public MegaBetGame(Lottery lottery) {
+    public MegaBetGame(Lottery lottery, int cash) {
         this.lottery = lottery;
+        this.cash = cash;
         drawnCodes = new ArrayList<>();
     }
 
-    @FXML
-    void goToPreviousGame(ActionEvent event) {
-
+    void setCash(int cash){
+        cash_lbl.setText("cash: " + cash);
     }
 
     @FXML
-    void onSpinBtnClick(ActionEvent event) {
+    void onSpinBtnClick(ActionEvent event) throws IOException {
         code1_lbl.setVisible(false);
         code2_lbl.setVisible(false);
         code3_lbl.setVisible(false);
         drawnCodes.clear();
+        win_lbl.setVisible(false);
+        lose_lbl.setVisible(false);
         Random random = new Random();
-        int drawnNumber = random.nextInt(0, lottery.getCodes().size());
-        fillDrawnCodes(drawnNumber);
-        code1_lbl.setVisible(true);
-        code1_lbl.setText(drawnCodes.get(0).getCode());
-        code1Won_lbl.setText(String.valueOf(drawnCodes.get(0).getIsWinning()));
-        code2_lbl.setVisible(true);
-        code2_lbl.setText(drawnCodes.get(1).getCode());
-        code2Won_lbl.setText(String.valueOf(drawnCodes.get(1).getIsWinning()));
-        code3_lbl.setVisible(true);
-        code3_lbl.setText(drawnCodes.get(2).getCode());
-        code3Won_lbl.setText(String.valueOf(drawnCodes.get(2).getIsWinning()));
+
+        if (!(cash < 50)) {
+            int drawnNumber = random.nextInt(0, lottery.getCodes().size());
+            fillDrawnCodes(drawnNumber);
+            code1_lbl.setVisible(true);
+            code1_lbl.setText(drawnCodes.get(0).getCode());
+            code1Won_lbl.setText(String.valueOf(drawnCodes.get(0).getIsWinning()));
+            code2_lbl.setVisible(true);
+            code2_lbl.setText(drawnCodes.get(1).getCode());
+            code2Won_lbl.setText(String.valueOf(drawnCodes.get(1).getIsWinning()));
+            code3_lbl.setVisible(true);
+            code3_lbl.setText(drawnCodes.get(2).getCode());
+            code3Won_lbl.setText(String.valueOf(drawnCodes.get(2).getIsWinning()));
+            if (isWon()) {
+                cash = cash*2;
+                cash_lbl.setText("cash: " + cash);
+                win_lbl.setVisible(true);
+            } else {
+                cash = cash/2;
+                cash_lbl.setText("cash: " + cash);
+                lose_lbl.setVisible(true);
+            }
+        } else goToMainMenu(event);
     }
 
     private void fillDrawnCodes(int drawnNumber) {
@@ -98,17 +119,39 @@ public class MegaBetGame {
         }
     }
 
-    private boolean isWon(int drawnNumber) {
-        ArrayList<Code> drawnCodes = new ArrayList<>();
-        if (drawnNumber != 0 && drawnNumber != lottery.getCodes().size()-1){
-            for (int i = drawnNumber-1; i <= drawnNumber+1; i++){
-                if (!(lottery.getCodes().get(i).getIsWinning()) || lottery.getCodes().get(i).getIsUsed()){
-                    return false;
-                }
+    private boolean isWon() {
+        for (Code code: drawnCodes){
+            if (!(code.getIsWinning()) || code.getIsUsed()){
+                return false;
             }
-        } else if (drawnNumber == 0){
-
         }
         return true;
+    }
+    @FXML
+    void goToPreviousGame(ActionEvent event) throws IOException {
+        OneArmedBanditController oneArmedBanditController = new OneArmedBanditController(lottery, cash);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("one-armed-bandit-scene.fxml"));
+        loader.setController(oneArmedBanditController);
+        Parent root = loader.load();
+        oneArmedBanditController.setCash(cash);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("Play");
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    private void goToMainMenu(ActionEvent event) throws IOException {
+        CodeGeneratorFXController codeGeneratorFXController = new CodeGeneratorFXController(lottery);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("start-scene.fxml"));
+        loader.setController(codeGeneratorFXController);
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("Code generator");
+        stage.setScene(scene);
+        stage.show();
     }
 }
