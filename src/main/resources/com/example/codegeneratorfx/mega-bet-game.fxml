@@ -1,13 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="731.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="cash_lbl" alignment="CENTER_RIGHT" layoutX="607.0" layoutY="14.0" prefHeight="18.0" prefWidth="109.0" text="cash: 0" />
+      <Label fx:id="win_lbl" alignment="CENTER" layoutX="171.0" layoutY="32.0" prefHeight="90.0" prefWidth="389.0" style="-fx-background-color: green;" text="Wygrałeś!" visible="false">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="360.0" mnemonicParsing="false" onAction="#goToPreviousGame" text="Back" />
+      <Label fx:id="lose_lbl" alignment="CENTER" layoutX="171.0" layoutY="32.0" prefHeight="90.0" prefWidth="389.0" style="-fx-background-color: red;" text="Przegrałeś :(" visible="false">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutX="261.0" layoutY="137.0" prefHeight="100.0" prefWidth="226.0">
+         <children>
+            <Label fx:id="code1_lbl" prefHeight="27.0" prefWidth="51.0" text="label" visible="false">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="code2_lbl" text="Label" visible="false">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="code3_lbl" text="Label" visible="false">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <Button fx:id="spinBtn" layoutX="279.0" layoutY="250.0" mnemonicParsing="false" onAction="#onSpinBtnClick" prefHeight="58.0" prefWidth="191.0" text="Spin!">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Label fx:id="code1Won_lbl" layoutX="261.0" layoutY="328.0" text="Label" />
+      <Label fx:id="code2Won_lbl" layoutX="360.0" layoutY="329.0" text="Label" />
+      <Label fx:id="code3Won_lbl" layoutX="442.0" layoutY="329.0" text="Label" />
+   </children>
 </AnchorPane>
