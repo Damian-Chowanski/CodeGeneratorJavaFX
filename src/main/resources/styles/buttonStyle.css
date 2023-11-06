@@ -1,10 +1,13 @@
 .button {
-    -fx-background-color:  #67597A; /* Kolor tła przycisku */
-    -fx-text-fill:  white; /* Kolor tekstu na przycisku */
-    -fx-font-size: 12px; /* Rozmiar czcionki */
+    -fx-background-color:  #67597A;
+    -fx-text-fill:  white;
+    -fx-font-size: 12px;
 }
 
-/* Styl przycisku po najechaniu kursorem myszy */
 .button:hover {
-    -fx-background-color: #45a049; /* Kolor tła przycisku po najechaniu */
+    -fx-background-color: #45a049;
+}
+
+.button:pressed {
+    -fx-background-color: #85BAA1;
 }
