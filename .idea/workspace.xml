@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="8e2c3f7e-1854-4c0a-93b1-7783f8a9ae32" name="Changes" comment="added cash counter for game">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/MegaBetGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/MegaBetGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/OneArmedBanditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/codegeneratorfx/OneArmedBanditController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codegeneratorfx/mega-bet-game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codegeneratorfx/mega-bet-game.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codegeneratorfx/one-armed-bandit-scene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codegeneratorfx/one-armed-bandit-scene.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/buttonStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/buttonStyle.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

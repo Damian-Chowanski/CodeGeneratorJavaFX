@@ -2,8 +2,6 @@ package com.example.codegeneratorfx;
 
 import com.example.codegeneratorfx.supportClasses.Code;
 import com.example.codegeneratorfx.supportClasses.Lottery;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,8 +10,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,24 +29,6 @@ public class MegaBetGame {
     private Label cash_lbl;
 
     @FXML
-    private Label code1Won_lbl;
-
-    @FXML
-    private Label code1_lbl;
-
-    @FXML
-    private Label code2Won_lbl;
-
-    @FXML
-    private Label code2_lbl;
-
-    @FXML
-    private Label code3Won_lbl;
-
-    @FXML
-    private Label code3_lbl;
-
-    @FXML
     private Label lose_lbl;
 
     @FXML
@@ -56,8 +37,17 @@ public class MegaBetGame {
     @FXML
     private Label win_lbl;
 
+    @FXML
+    private ImageView imgLotteryLeft;
+
+    @FXML
+    private ImageView imgLotteryMid;
+
+    @FXML
+    private ImageView imgLotteryRight;
+
     private int cash;
-    private ArrayList<Code> drawnCodes;
+    private final ArrayList<Code> drawnCodes;
 
     public MegaBetGame(Lottery lottery, int cash) {
         this.lottery = lottery;
@@ -71,26 +61,20 @@ public class MegaBetGame {
 
     @FXML
     void onSpinBtnClick(ActionEvent event) throws IOException {
-        code1_lbl.setVisible(false);
-        code2_lbl.setVisible(false);
-        code3_lbl.setVisible(false);
         drawnCodes.clear();
         win_lbl.setVisible(false);
         lose_lbl.setVisible(false);
+        imgLotteryLeft.setVisible(false);
+        imgLotteryMid.setVisible(false);
+        imgLotteryRight.setVisible(false);
         Random random = new Random();
 
         if (!(cash < 50)) {
             int drawnNumber = random.nextInt(0, lottery.getCodes().size());
             fillDrawnCodes(drawnNumber);
-            code1_lbl.setVisible(true);
-            code1_lbl.setText(drawnCodes.get(0).getCode());
-            code1Won_lbl.setText(String.valueOf(drawnCodes.get(0).getIsWinning()));
-            code2_lbl.setVisible(true);
-            code2_lbl.setText(drawnCodes.get(1).getCode());
-            code2Won_lbl.setText(String.valueOf(drawnCodes.get(1).getIsWinning()));
-            code3_lbl.setVisible(true);
-            code3_lbl.setText(drawnCodes.get(2).getCode());
-            code3Won_lbl.setText(String.valueOf(drawnCodes.get(2).getIsWinning()));
+            displayImages(drawnCodes.get(0), imgLotteryLeft);
+            displayImages(drawnCodes.get(1), imgLotteryMid);
+            displayImages(drawnCodes.get(2), imgLotteryRight);
             if (isWon()) {
                 cash = cash*2;
                 cash_lbl.setText("cash: " + cash);
@@ -101,6 +85,20 @@ public class MegaBetGame {
                 lose_lbl.setVisible(true);
             }
         } else goToMainMenu(event);
+    }
+
+    private void displayImages(Code code, ImageView imageView) {
+        imageView.setVisible(true);
+        if (code.getIsWinning() && !(code.getIsUsed())){
+            Image image = new Image(getClass().getResourceAsStream("/images/diamond.png"));
+            imageView.setImage(image);
+        } else if (code.getIsUsed()) {
+            Image image = new Image(getClass().getResourceAsStream("/images/Empty.png"));
+            imageView.setImage(image);
+        } else {
+            Image image = new Image(getClass().getResourceAsStream("/images/crashedDiamond.png"));
+            imageView.setImage(image);
+        }
     }
 
     private void fillDrawnCodes(int drawnNumber) {

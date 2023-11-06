@@ -12,6 +12,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -20,22 +22,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class OneArmedBanditController {
-
-    @FXML
-    private Label code1_lbl;
-
-    @FXML
-    private Label code2_lbl;
-
-    @FXML
-    private Label code3_lbl;
-
-    @FXML
-    private Label code1Won_lbl;
-    @FXML
-    private Label code2Won_lbl;
-    @FXML
-    private Label code3Won_lbl;
 
     @FXML
     private Button spinBtn;
@@ -47,6 +33,14 @@ public class OneArmedBanditController {
     private Label win_lbl;
     @FXML
     private Button megaBet_btn;
+    @FXML
+    private ImageView imgLotteryLeft;
+
+    @FXML
+    private ImageView imgLotteryMid;
+
+    @FXML
+    private ImageView imgLotteryRight;
     @FXML
     private Label cash_lbl;
 
@@ -69,12 +63,12 @@ public class OneArmedBanditController {
 
     @FXML
     void onSpinBtnClick(ActionEvent event) throws IOException {
-        code1_lbl.setVisible(false);
-        code2_lbl.setVisible(false);
-        code3_lbl.setVisible(false);
+        drawnCodes.clear();
         win_lbl.setVisible(false);
         lose_lbl.setVisible(false);
-        drawnCodes.clear();
+        imgLotteryLeft.setVisible(false);
+        imgLotteryMid.setVisible(false);
+        imgLotteryRight.setVisible(false);
 
         if (!(playingCodes.size() <3) && cash >=50) {
 
@@ -82,25 +76,22 @@ public class OneArmedBanditController {
             spinBtn.setText("Spin Again!");
 
             int maxSteps = 10;
-            Timeline timeline1 = startTimeLine(code1_lbl,code1Won_lbl, maxSteps);
-            Timeline timeline2 = startTimeLine(code2_lbl,code2Won_lbl, maxSteps);
-            Timeline timeline3 = startTimeLine(code3_lbl,code3Won_lbl, maxSteps);
+            Timeline timeline1 = startTimeLine(imgLotteryLeft, maxSteps);
+            Timeline timeline2 = startTimeLine(imgLotteryMid, maxSteps);
+            Timeline timeline3 = startTimeLine(imgLotteryRight, maxSteps);
 
             timeline1.setOnFinished(TimeEvent -> {
-                addCodeToDrawn(code1_lbl);
-                removeSelectedCodeFromList(code1_lbl);
+                spinLabel(imgLotteryLeft,true);
                 timeline2.play();
             });
 
             timeline2.setOnFinished(TimeEvent -> {
-                addCodeToDrawn(code2_lbl);
-                removeSelectedCodeFromList(code2_lbl);
+                spinLabel(imgLotteryMid,true);
                 timeline3.play();
             });
 
             timeline3.setOnFinished(TimeEvent -> {
-                addCodeToDrawn(code3_lbl);
-                System.out.println(drawnCodes.size());
+                spinLabel(imgLotteryRight,true);
                 if (isWon()) {
                     win_lbl.setVisible(true);
                     cash += 100;
@@ -110,36 +101,27 @@ public class OneArmedBanditController {
                     cash -= 50;
                     cash_lbl.setText("cash: " + cash);
                 }
-                removeSelectedCodeFromList(code3_lbl);
             });
 
             timeline1.play();
         }else goToMainMenu(event);
     }
 
-    private void addCodeToDrawn(Label label) {
-        for (Code code: playingCodes){
-            if(code.getCode().equalsIgnoreCase(label.getText())){
-                drawnCodes.add(code);
-            }
-        }
-    }
-
     private boolean isWon() {
         for (Code code: drawnCodes){
-            if (!(code.getIsWinning())){
+            if (!(code.getIsWinning() && !(code.getIsUsed()))){
                 return false;
             }
         }
         return true;
     }
 
-    private Timeline startTimeLine(Label label, Label labelWon, int maxSteps) {
+    private Timeline startTimeLine(ImageView imageView, int maxSteps) {
         final int[] currentStep = {0};
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.seconds(0.15), event -> {
                     if (currentStep[0] < maxSteps) {
-                        spinLabel(label, labelWon);
+                        spinLabel(imageView,false);
                         currentStep[0]++;
                     }
                 })
@@ -148,22 +130,36 @@ public class OneArmedBanditController {
         return timeline;
     }
 
-    private void removeSelectedCodeFromList(Label label) {
+    private void removeSelectedCodeFromList(String codeString) {
         ArrayList<Code> copyList = new ArrayList<>(playingCodes);
         for (Code code: playingCodes){
-            if(code.getCode().equalsIgnoreCase(label.getText())){
+            if(code.getCode().equalsIgnoreCase(codeString)){
                 copyList.remove(code);
             }
         }
         playingCodes = copyList;
     }
 
-    private void spinLabel(Label label, Label labelWon) {
+    private void spinLabel(ImageView imageView, boolean isLast) {
         Random rand = new Random();
         int randomID = rand.nextInt(0, playingCodes.size());
-        label.setVisible(true);
-        label.setText(String.valueOf(playingCodes.get(randomID).getCode()));
-        labelWon.setText(String.valueOf(playingCodes.get(randomID).getIsWinning()));
+        Code code = playingCodes.get(randomID);
+        imageView.setVisible(true);
+        if (code.getIsWinning() && !(code.getIsUsed())){
+            Image image = new Image(getClass().getResourceAsStream("/images/diamond.png"));
+            imageView.setImage(image);
+        } else if (code.getIsUsed()) {
+            Image image = new Image(getClass().getResourceAsStream("/images/Empty.png"));
+            imageView.setImage(image);
+        } else {
+            Image image = new Image(getClass().getResourceAsStream("/images/crashedDiamond.png"));
+            imageView.setImage(image);
+        }
+        if (isLast){
+            removeSelectedCodeFromList(code.getCode());
+            drawnCodes.add(code);
+        }
+
     }
 
     @FXML

@@ -52,9 +52,6 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Label fx:id="code1Won_lbl" layoutX="187.0" layoutY="333.0" text="Label" />
-      <Label fx:id="code2Won_lbl" layoutX="286.0" layoutY="334.0" text="Label" />
-      <Label fx:id="code3Won_lbl" layoutX="368.0" layoutY="334.0" text="Label" />
       <Label fx:id="cash_lbl" alignment="CENTER_RIGHT" layoutX="470.0" layoutY="27.0" prefHeight="18.0" prefWidth="109.0" text="cash: 0">
          <font>
             <Font size="17.0" />
@@ -65,14 +62,14 @@
             <Image url="@../../../images/diamond.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgLotteryMid" fitHeight="90.0" fitWidth="90.0" layoutX="256.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgLotteryMid" fitHeight="90.0" fitWidth="90.0" layoutX="255.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/Empty.png" />
+            <Image url="@../../../images/diamond.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgLottery3" fitHeight="90.0" fitWidth="90.0" layoutX="368.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgLotteryRight" fitHeight="90.0" fitWidth="90.0" layoutX="368.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/crashedDiamond.png" />
+            <Image url="@../../../images/diamond.png" />
          </image>
       </ImageView>
    </children>
