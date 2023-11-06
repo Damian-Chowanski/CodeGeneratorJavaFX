@@ -15,6 +15,7 @@ public class CodeGeneratorFX extends Application {
         CodeGeneratorFXController codeGeneratorFXController = new CodeGeneratorFXController(lottery);
         FXMLLoader fxmlLoader = new FXMLLoader(CodeGeneratorFX.class.getResource("start-scene.fxml"));
         fxmlLoader.setController(codeGeneratorFXController);
+
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Welcome in Code Generator!");
         stage.setScene(scene);
