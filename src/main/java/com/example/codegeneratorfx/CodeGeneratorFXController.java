@@ -21,38 +21,30 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CodeGeneratorFXController implements Initializable {
-
     Lottery lottery;
     @FXML
     private TableView<Code> codes_tab;
-
     @FXML
     private TableColumn<Code, Integer> idColumn;
-
     @FXML
     private TableColumn<Code, String> codeColumn;
-
     @FXML
     private TableColumn<Code, Boolean> isUsedColumn;
-
     @FXML
     private TableColumn<Code, Boolean> isWonColumn;
-
     @FXML
     private TextField lengthOfCodes_tv;
-
     @FXML
     private TextField qtyOfCodes_tv;
-
     @FXML
     private Button playBtn;
+    ObservableList<Code> listOfCodes = FXCollections.observableArrayList();
 
     public CodeGeneratorFXController(Lottery lottery) {
         this.lottery = lottery;
     }
 
-    ObservableList<Code> listOfCodes = FXCollections.observableArrayList();
-
+    /* Function below intializing table with data from Lottery class */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         listOfCodes.addAll(lottery.getCodes());
@@ -65,7 +57,7 @@ public class CodeGeneratorFXController implements Initializable {
     }
 
     @FXML
-    public void onButtonClick(ActionEvent event) throws IOException {
+    public void onAdminButtonClick(ActionEvent event) throws IOException {
         AdministrationPanelScene administrationPanelScene = new AdministrationPanelScene(lottery);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("administration-panel.fxml"));
         loader.setController(administrationPanelScene);
