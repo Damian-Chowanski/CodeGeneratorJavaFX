@@ -70,7 +70,7 @@ public class OneArmedBanditController {
         imgLotteryMid.setVisible(false);
         imgLotteryRight.setVisible(false);
 
-        if (!(playingCodes.size() <3) && cash >=50) {
+        if (!(playingCodes.size() < 3) && cash >= 50) {
 
             cash_lbl.setText("cash: " + cash);
             spinBtn.setText("Spin Again!");
@@ -81,17 +81,17 @@ public class OneArmedBanditController {
             Timeline timeline3 = startTimeLine(imgLotteryRight, maxSteps);
 
             timeline1.setOnFinished(TimeEvent -> {
-                spinLabel(imgLotteryLeft,true);
+                spinCode(imgLotteryLeft, true);
                 timeline2.play();
             });
 
             timeline2.setOnFinished(TimeEvent -> {
-                spinLabel(imgLotteryMid,true);
+                spinCode(imgLotteryMid, true);
                 timeline3.play();
             });
 
             timeline3.setOnFinished(TimeEvent -> {
-                spinLabel(imgLotteryRight,true);
+                spinCode(imgLotteryRight, true);
                 if (isWon()) {
                     win_lbl.setVisible(true);
                     cash += 100;
@@ -104,12 +104,12 @@ public class OneArmedBanditController {
             });
 
             timeline1.play();
-        }else goToMainMenu(event);
+        } else goToMainMenu(event);
     }
 
     private boolean isWon() {
-        for (Code code: drawnCodes){
-            if (!(code.getIsWinning() && !(code.getIsUsed()))){
+        for (Code code : drawnCodes) {
+            if (!(code.getIsWinning() && !(code.getIsUsed()))) {
                 return false;
             }
         }
@@ -121,7 +121,7 @@ public class OneArmedBanditController {
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.seconds(0.15), event -> {
                     if (currentStep[0] < maxSteps) {
-                        spinLabel(imageView,false);
+                        spinCode(imageView, false);
                         currentStep[0]++;
                     }
                 })
@@ -132,20 +132,20 @@ public class OneArmedBanditController {
 
     private void removeSelectedCodeFromList(String codeString) {
         ArrayList<Code> copyList = new ArrayList<>(playingCodes);
-        for (Code code: playingCodes){
-            if(code.getCode().equalsIgnoreCase(codeString)){
+        for (Code code : playingCodes) {
+            if (code.getCode().equalsIgnoreCase(codeString)) {
                 copyList.remove(code);
             }
         }
         playingCodes = copyList;
     }
 
-    private void spinLabel(ImageView imageView, boolean isLast) {
+    private void spinCode(ImageView imageView, boolean isLast) {
         Random rand = new Random();
         int randomID = rand.nextInt(0, playingCodes.size());
         Code code = playingCodes.get(randomID);
         imageView.setVisible(true);
-        if (code.getIsWinning() && !(code.getIsUsed())){
+        if (code.getIsWinning() && !(code.getIsUsed())) {
             Image image = new Image(getClass().getResourceAsStream("/images/diamond.png"));
             imageView.setImage(image);
         } else if (code.getIsUsed()) {
@@ -155,7 +155,7 @@ public class OneArmedBanditController {
             Image image = new Image(getClass().getResourceAsStream("/images/crashedDiamond.png"));
             imageView.setImage(image);
         }
-        if (isLast){
+        if (isLast) {
             removeSelectedCodeFromList(code.getCode());
             drawnCodes.add(code);
         }
