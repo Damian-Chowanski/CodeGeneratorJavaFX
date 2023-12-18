@@ -1,4 +1,4 @@
-package com.example.codegeneratorfx;
+package com.example.codegeneratorfx.controllers;
 
 import com.example.codegeneratorfx.supportClasses.Code;
 import com.example.codegeneratorfx.supportClasses.Lottery;
@@ -20,7 +20,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class CodeGeneratorFXController implements Initializable {
+public class MainController implements Initializable {
     Lottery lottery;
     @FXML
     private TableView<Code> codes_tab;
@@ -40,7 +40,7 @@ public class CodeGeneratorFXController implements Initializable {
     private Button playBtn;
     ObservableList<Code> listOfCodes = FXCollections.observableArrayList();
 
-    public CodeGeneratorFXController(Lottery lottery) {
+    public MainController(Lottery lottery) {
         this.lottery = lottery;
     }
 
@@ -58,9 +58,9 @@ public class CodeGeneratorFXController implements Initializable {
 
     @FXML
     public void onAdminButtonClick(ActionEvent event) throws IOException {
-        AdministrationPanelScene administrationPanelScene = new AdministrationPanelScene(lottery);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("administration-panel.fxml"));
-        loader.setController(administrationPanelScene);
+        AdministrationPanelController administrationPanelController = new AdministrationPanelController(lottery);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/codegeneratorfx/administration-panel.fxml"));
+        loader.setController(administrationPanelController);
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -107,11 +107,11 @@ public class CodeGeneratorFXController implements Initializable {
     void onPlayBtnClick(ActionEvent event) throws IOException {
 
         if (!lottery.getCodes().isEmpty()) {
-            OneArmedBanditController oneArmedBanditController = new OneArmedBanditController(lottery, 1000);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("one-armed-bandit-scene.fxml"));
-            loader.setController(oneArmedBanditController);
+            GameController gameController = new GameController(lottery, 1000);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/codegeneratorfx/game.fxml"));
+            loader.setController(gameController);
             Parent root = loader.load();
-            oneArmedBanditController.setCash(1000);
+            gameController.setCash(1000);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);

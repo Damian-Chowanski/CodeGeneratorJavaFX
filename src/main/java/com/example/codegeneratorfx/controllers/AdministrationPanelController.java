@@ -1,11 +1,10 @@
-package com.example.codegeneratorfx;
+package com.example.codegeneratorfx.controllers;
 
 import com.example.codegeneratorfx.supportClasses.Code;
 import com.example.codegeneratorfx.supportClasses.Lottery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,13 +16,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.CookieHandler;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
-public class AdministrationPanelScene implements Initializable {
+public class AdministrationPanelController implements Initializable {
 
     @FXML
     private Button change_Btn;
@@ -59,7 +56,7 @@ public class AdministrationPanelScene implements Initializable {
     private final ObservableList<Code> listOfCodes = FXCollections.observableArrayList();
 
 
-    public AdministrationPanelScene(Lottery lottery) {
+    public AdministrationPanelController(Lottery lottery) {
         this.lottery = lottery;
         listOfCodes.addAll(lottery.getCodes());
     }
@@ -205,9 +202,9 @@ public class AdministrationPanelScene implements Initializable {
     }
 
     public void onBackBtnClick(ActionEvent event) throws IOException {
-        CodeGeneratorFXController codeGeneratorFXController = new CodeGeneratorFXController(lottery);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("start-scene.fxml"));
-        loader.setController(codeGeneratorFXController);
+        MainController mainController = new MainController(lottery);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/codegeneratorfx/start-scene.fxml"));
+        loader.setController(mainController);
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -1,4 +1,4 @@
-package com.example.codegeneratorfx;
+package com.example.codegeneratorfx.controllers;
 
 import com.example.codegeneratorfx.supportClasses.Code;
 import com.example.codegeneratorfx.supportClasses.Lottery;
@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MegaBetGame {
+public class MegaBetController {
     Lottery lottery;
 
 
@@ -49,7 +49,7 @@ public class MegaBetGame {
     private int cash;
     private final ArrayList<Code> drawnCodes;
 
-    public MegaBetGame(Lottery lottery, int cash) {
+    public MegaBetController(Lottery lottery, int cash) {
         this.lottery = lottery;
         this.cash = cash;
         drawnCodes = new ArrayList<>();
@@ -127,11 +127,11 @@ public class MegaBetGame {
     }
     @FXML
     void goToPreviousGame(ActionEvent event) throws IOException {
-        OneArmedBanditController oneArmedBanditController = new OneArmedBanditController(lottery, cash);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("one-armed-bandit-scene.fxml"));
-        loader.setController(oneArmedBanditController);
+        GameController gameController = new GameController(lottery, cash);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/codegeneratorfx/game.fxml"));
+        loader.setController(gameController);
         Parent root = loader.load();
-        oneArmedBanditController.setCash(cash);
+        gameController.setCash(cash);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -141,9 +141,9 @@ public class MegaBetGame {
     }
     @FXML
     private void goToMainMenu(ActionEvent event) throws IOException {
-        CodeGeneratorFXController codeGeneratorFXController = new CodeGeneratorFXController(lottery);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("start-scene.fxml"));
-        loader.setController(codeGeneratorFXController);
+        MainController mainController = new MainController(lottery);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/codegeneratorfx/start-scene.fxml"));
+        loader.setController(mainController);
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

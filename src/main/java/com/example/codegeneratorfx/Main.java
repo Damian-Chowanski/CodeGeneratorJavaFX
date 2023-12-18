@@ -1,5 +1,6 @@
 package com.example.codegeneratorfx;
 
+import com.example.codegeneratorfx.controllers.MainController;
 import com.example.codegeneratorfx.supportClasses.Lottery;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,13 +9,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class CodeGeneratorFX extends Application {
+public class Main extends Application {
     Lottery lottery = new Lottery();
     @Override
     public void start(Stage stage) throws IOException {
-        CodeGeneratorFXController codeGeneratorFXController = new CodeGeneratorFXController(lottery);
-        FXMLLoader fxmlLoader = new FXMLLoader(CodeGeneratorFX.class.getResource("start-scene.fxml"));
-        fxmlLoader.setController(codeGeneratorFXController);
+        MainController mainController = new MainController(lottery);
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("start-scene.fxml"));
+        fxmlLoader.setController(mainController);
 
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Welcome in Code Generator!");
