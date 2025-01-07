@@ -6,43 +6,49 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="526.0" prefWidth="577.0" spacing="20.0" style="-fx-min-height: 100; -fx-min-width: 100; -fx-background-color: #6E8894;" stylesheets="@../../../styles/global-colors.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-   <Pane prefHeight="505.0" prefWidth="559.0">
-      <children>
-         <Button fx:id="beginBtn" layoutX="352.0" layoutY="434.0" mnemonicParsing="false" onAction="#onAdminButtonClick" prefHeight="46.0" prefWidth="149.0" stylesheets="@../../../styles/buttonStyle.css" text="Administration Panel" />
-         <Button fx:id="generateBTN" layoutX="238.0" layoutY="169.0" mnemonicParsing="false" onAction="#onGenerateBtnClick" stylesheets="@../../../styles/buttonStyle.css" text="Generate" />
-         <TableView fx:id="codes_tab" editable="true" layoutX="36.0" layoutY="210.0" prefHeight="200.0" prefWidth="465.0" style="-fx-background-color: #CEEDDB;">
-           <columns>
-             <TableColumn fx:id="idColumn" prefWidth="48.000003814697266" text="ID" />
-             <TableColumn fx:id="codeColumn" prefWidth="175.3333511352539" text="Code" />
-               <TableColumn fx:id="isUsedColumn" prefWidth="114.6666259765625" text="IsUsed" />
-               <TableColumn fx:id="isWonColumn" prefWidth="127.33334350585938" text="IsWon" />
-           </columns>
-         </TableView>
-         <TextField fx:id="qtyOfCodes_tv" layoutX="36.0" layoutY="133.0" promptText="number of codes" style="-fx-background-color: #CEEDDB;" />
-         <TextField fx:id="lengthOfCodes_tv" layoutX="351.0" layoutY="133.0" promptText="code length" style="-fx-background-color: #CEEDDB;" />
-         <Button id="button" fx:id="playBtn" layoutX="36.0" layoutY="434.0" mnemonicParsing="false" onAction="#onPlayBtnClick" prefHeight="46.0" prefWidth="90.0" stylesheets="@../../../styles/buttonStyle.css" text="PLAY!">
-            <font>
-               <Font name="System Bold" size="18.0" />
-            </font>
-         </Button>
-         <VBox alignment="TOP_CENTER" layoutX="36.0" layoutY="14.0" prefHeight="100.0" prefWidth="465.0">
+
+<AnchorPane stylesheets="@../../../styles/global-colors.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="CENTER" prefHeight="526.0" prefWidth="577.0" spacing="20.0" style="-fx-min-height: 100; -fx-min-width: 100; -fx-background-color: #6E8894;">
+          <padding>
+              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+          </padding>
+         <Pane prefHeight="505.0" prefWidth="559.0">
             <children>
-               <Label text="Welcome in my mini game!" textAlignment="CENTER">
+               <Button fx:id="beginBtn" layoutX="352.0" layoutY="434.0" mnemonicParsing="false" onAction="#onAdminButtonClick" prefHeight="46.0" prefWidth="149.0" stylesheets="@../../../styles/buttonStyle.css" text="Administration Panel" />
+               <Button fx:id="generateBTN" layoutX="238.0" layoutY="169.0" mnemonicParsing="false" onAction="#onGenerateBtnClick" stylesheets="@../../../styles/buttonStyle.css" text="Generate" />
+               <TableView fx:id="codes_tab" editable="true" layoutX="36.0" layoutY="210.0" prefHeight="200.0" prefWidth="465.0" style="-fx-background-color: #CEEDDB;">
+                 <columns>
+                   <TableColumn fx:id="idColumn" prefWidth="48.000003814697266" text="ID" />
+                   <TableColumn fx:id="codeColumn" prefWidth="175.3333511352539" text="Code" />
+                     <TableColumn fx:id="isUsedColumn" prefWidth="114.6666259765625" text="IsUsed" />
+                     <TableColumn fx:id="isWonColumn" prefWidth="127.33334350585938" text="IsWon" />
+                 </columns>
+               </TableView>
+               <TextField fx:id="qtyOfCodes_tv" layoutX="36.0" layoutY="133.0" promptText="number of codes" style="-fx-background-color: #CEEDDB;" />
+               <TextField fx:id="lengthOfCodes_tv" layoutX="351.0" layoutY="133.0" promptText="code length" style="-fx-background-color: #CEEDDB;" />
+               <Button id="button" fx:id="playBtn" layoutX="36.0" layoutY="434.0" mnemonicParsing="false" onAction="#onPlayBtnClick" prefHeight="46.0" prefWidth="90.0" stylesheets="@../../../styles/buttonStyle.css" text="PLAY!">
                   <font>
-                     <Font size="18.0" />
+                     <Font name="System Bold" size="18.0" />
                   </font>
-               </Label>
-               <Label prefHeight="68.0" prefWidth="465.0" text="To start the game, you must first generate codes. Enter in the appropriate fields the number of codes that will be used during the game, and their length. After generating the codes, click on the &quot;PLAY!&quot; button to play or edit the codes in the Administration panel." wrapText="true" />
+               </Button>
+               <VBox alignment="TOP_CENTER" layoutX="36.0" layoutY="14.0" prefHeight="100.0" prefWidth="465.0">
+                  <children>
+                     <Label text="Welcome in my mini game!" textAlignment="CENTER">
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                     </Label>
+                     <Label prefHeight="68.0" prefWidth="465.0" text="To start the game, you must first generate codes. Enter in the appropriate fields the number of codes that will be used during the game, and their length. After generating the codes, click on the &quot;PLAY!&quot; button to play or edit the codes in the Administration panel." wrapText="true" />
+                  </children>
+               </VBox>
             </children>
-         </VBox>
-      </children>
-   </Pane>
-</VBox>
+         </Pane>
+      </VBox>
+   </children>
+</AnchorPane>
